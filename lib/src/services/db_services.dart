@@ -38,10 +38,10 @@ class DatabaseService {
     _db = await openDatabase(path, readOnly: true);
   }
 
-  Future getNames() async {
+  Future<List<CityName>> getNames() async {
     await initDatabase();
     List<Map> list = await _db.rawQuery('SELECT * FROM cityname');
-    print(list.length);
+    return list.map((cityname) => CityName.fromJson(cityname)).toList();
   }
 
   dispose() {
