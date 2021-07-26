@@ -1,7 +1,7 @@
 class CityName {
-  String name;
-  String lang;
-  int cityposrowid;
+  final String name;
+  final String lang;
+  final int cityposrowid;
 
   CityName(
       {required this.name, required this.lang, required this.cityposrowid});
@@ -12,4 +12,22 @@ class CityName {
         lang: json['lang'],
         cityposrowid: json['cityposrowid']);
   }
-}
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'lang': lang,
+      'cityposrowid': cityposrowid,
+    };
+  }
+
+  // Implement toString to make it easier to see information about
+  // each dog when using the print statement.
+  @override
+  String toString() {
+    return 'CityName{id: $name, name: $lang, age: $cityposrowid}';
+  }
+}// end of class
+
+
+
+
