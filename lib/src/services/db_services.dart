@@ -38,11 +38,33 @@ class DatabaseService {
     _db = await openDatabase(path, readOnly: true);
   }
 
+// from the dogs sample
+// A method that retrieves all the citynames (dogs) from the cityname(dogs) table.
+<List<CityName>> getcitynames() async {
+  // Get a reference to the database.
+  //final db = await database;
+
+  // Query the table for all The Dogs.
+  final List<Map<String, dynamic>> maps = await _db.query('dogs');
+
+  // Convert the List<Map<String, dynamic> into a List<Dog>.
+  return List.generate(maps.length, (i) {
+    return CityName(
+      name: maps[i]['name'],
+      lang: maps[i]['lang'],
+      cityposrowid: maps[i]['cityposrowid'],
+    );
+  });
+}
+
+
+/*
   Future<List<CityName>> getNames() async {
     await initDatabase();
     List<Map> list = await _db.rawQuery('SELECT * FROM cityname');
     return list.map((cityname) => CityName.fromJson(cityname)).toList();
   }
+*/
 
   dispose() {
     _db.close();
